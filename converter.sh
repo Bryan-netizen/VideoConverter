@@ -38,7 +38,7 @@ for d in */; do
 done;
 
 if [ $# -eq 3 ]; then # Test format fix
-  po pd
+  popd
 fi
 
 echo "Done. Total files converted: $( find -name *.$2 | wc -l )"
