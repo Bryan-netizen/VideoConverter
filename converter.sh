@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e # Breaks the program execution on error
+
 target=$( find -name *.$1 | wc -l )
 completed=0
 
@@ -17,11 +20,14 @@ function convert_videos {
     done;
 }
 
-if [ $# -eq 3]; then
+convert_videos # Calling the function to execute it.
+
+if [ $# -eq 3 ]; then # Test format fix
    pushd "$3"
 fi
 
 echo "Total files to convert: $target"
+[[ -e "Converted" ]] && printf "\nDirectory Converted already exists\n\n" || mkdir Converted # Test for the folder to avoid error message.
 mkdir Converted
 for d in */; do
     pushd "$d"
@@ -31,8 +37,8 @@ for d in */; do
     echo "Files converted: $( find -name *.$2 | wc -l )"
 done;
 
-if [ $# -eq 3]; then
-  popd
+if [ $# -eq 3 ]; then # Test format fix
+  po pd
 fi
 
 echo "Done. Total files converted: $( find -name *.$2 | wc -l )"
